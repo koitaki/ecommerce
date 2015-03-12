@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load staticfiles %}
+
+{% block head_title %}
+Welcome To
+{% endblock %}
+
+{% block head_styles %}
+/*.jumbotron {color: red;}*/
+{% endblock %}
+
+
+{% block jumbotron %}
+<div class="container">
+
+	<!-- Main component for a primary marketing message or call to action -->
+	<div class="jumbotron">
+
+	<h1>Products Page</h1>
+	<p>Products on sale in the shop...
+	<p>
+		<a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+	</p>
+	</div>
+
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+
+	<div class='row'>
+
+	{% for product in products %}
+
+		<div class='col-sm-6 col-md-4'>
+		    <div class="thumbnail">
+
+				{% if product.productimage_set.all %}
+
+					{% for item in product.productimage_set.all %}
+						{% if item.featured %}
+							<a href='{{ product.get_absolute_url }}'>
+								<img class='img-responsive' src="{{ MEDIA_URL }}{{ item.image }}" alt="{{ item.image }}">
+							</a>
+					{% endif %}
+					{% endfor %}
+				{% else %}
+					<img class='img-responsive' src="{{ MEDIA_URL }}products/images/placeholder.png" />
+				{% endif %}
+
+				<div class="caption">
+					<a href='{{ product.get_absolute_url }}'><h3>{{ product.title }}</h3></a>
+					<p>{{ product.description|truncatewords:15 }}</p>
+					<p>{{ product.price }}</p>
+					<p><a href="{{ product.get_absolute_url }}" class="btn btn-xs btn-primary" role="button">View</a>
+					<a class='btn btn-xs btn-warning pull-right' href='{% url "add_to_cart" product.slug %}'>Add to cart</a></p> 
+				</div>
+
+			</div>
+		
+		</div>
+
+		{% cycle "" "" "</div><hr/><div class='row'>" %}
+
+	{% endfor %}
+
+	</div>
+
+{% endblock %}
+
+{% block jquery %}
+{% endblock %}
+

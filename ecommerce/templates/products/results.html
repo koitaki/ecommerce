@@ -1,0 +1,36 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load staticfiles %}
+
+{% block head_title %}
+Results
+{% endblock %}
+
+{% block head_styles %}
+{% endblock %}
+
+
+{% block jumbotron %}
+{% endblock %}
+
+
+
+{% block content %}
+
+	<div class='row'>
+
+	<h1>Results for {{ query }}: </h1>
+		
+		{{ products }}
+
+		<div class='col-sm-6 col-md-4'>
+		</div>
+
+	</div>
+
+{% endblock %}
+
+{% block jquery %}
+{% endblock %}
+
